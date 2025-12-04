@@ -1,0 +1,16 @@
+-- A Window Function in SQL performs a calculation across a set of table rows that are related to the current row,
+-- known as the "window," without collapsing the rows into a single output.
+-- Unlike standard aggregate functions (like SUM with GROUP BY), 
+-- window functions retain the original detail rows while adding a new column that contains the aggregated or calculated result for that row's window.
+
+-- Comparison
+-- SUM with GROUP BY: This shows the total sum of salary of each occupation. The # of rows=the # of occupation
+-- You can't add any other columns that aren't added under the group by
+
+SELECT occupation, SUM(salary)
+FROM employee_salary
+GROUP BY occupation;
+
+-- SUM with OVER(): This shows all the rows with the total sum of the occupation. The # of rows should be the same as the original 
+SELECT  occupation, SUM(salary) OVER(PARTITION BY occupation )
+FROM employee_salary;
